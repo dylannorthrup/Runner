@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+  public float acceleration = 2.5f;
   public float movementSpeed = 4f;
+  private float speed = 0f;
 
 //  public float movementSpeed = 0.0001f;
 //  private Color[] colors = { Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta, Color.red, Color.white, Color.yellow };
@@ -20,8 +22,10 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+    speed += acceleration * Time.deltaTime;
+   
     GetComponent<Rigidbody> ().velocity = new Vector3 (
-      movementSpeed, 
+      speed, 
       GetComponent<Rigidbody>().velocity.y, 
       GetComponent<Rigidbody>().velocity.z
     );
