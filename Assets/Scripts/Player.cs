@@ -7,7 +7,10 @@ public class Player : MonoBehaviour {
   public float acceleration = 2.5f;
   public float movementSpeed = 4f;
   public float jumpingSpeed = 6f;
+  public float jumpDuration = 0.75f;
+
   private float speed = 0f;
+  private float jumpingTimer = 0f;
 
 //  public float movementSpeed = 0.0001f;
 //  private Color[] colors = { Color.black, Color.blue, Color.cyan, Color.gray, Color.green, Color.magenta, Color.red, Color.white, Color.yellow };
@@ -37,12 +40,18 @@ public class Player : MonoBehaviour {
     );
 
     // Check for input
-    if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space")) {
-      GetComponent<Rigidbody> ().velocity = new Vector3 (
-        GetComponent<Rigidbody>().velocity.x, 
-        jumpingSpeed, 
-        GetComponent<Rigidbody>().velocity.z
-      );
+    if (Input.GetMouseButton(0) || Input.GetKey("space")) {
+      jumpingTimer += Time.deltaTime;
+
+      if (jumpingTimer < jumpDuration) {
+        GetComponent<Rigidbody> ().velocity = new Vector3 (
+          GetComponent<Rigidbody> ().velocity.x, 
+          jumpingSpeed, 
+          GetComponent<Rigidbody> ().velocity.z
+        );
+      } else {
+        
+      }
     }
 
 
