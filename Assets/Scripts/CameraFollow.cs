@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
     Vector3 targetPosition = new Vector3 (
       target.transform.position.x + offset.x, 
       target.transform.position.y + offset.y, 

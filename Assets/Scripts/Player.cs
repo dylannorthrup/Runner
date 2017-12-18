@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
   public float acceleration = 2.5f;
   public float movementSpeed = 4f;
+  public float jumpingSpeed = 6f;
   private float speed = 0f;
 
 //  public float movementSpeed = 0.0001f;
@@ -22,13 +23,28 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+    // Accelerate the player.
     speed += acceleration * Time.deltaTime;
+    if (speed > movementSpeed) {
+      speed = movementSpeed;
+    }
    
+    // Move the player.
     GetComponent<Rigidbody> ().velocity = new Vector3 (
       speed, 
       GetComponent<Rigidbody>().velocity.y, 
       GetComponent<Rigidbody>().velocity.z
     );
+
+    // Check for input
+    if (Input.GetMouseButtonDown(0) || Input.GetKeyDown("space")) {
+      GetComponent<Rigidbody> ().velocity = new Vector3 (
+        GetComponent<Rigidbody>().velocity.x, 
+        jumpingSpeed, 
+        GetComponent<Rigidbody>().velocity.z
+      );
+    }
+
 
 //    transform.position = new Vector3 (transform.position.x + movementSpeed * Time.deltaTime, 0, 0);
 //    transform.RotateAround(transform.position, Vector3.up, 2);
